@@ -11,12 +11,10 @@ public static class CubeGame
         ["blue"] = 14
     };
 
-    public static int GameStatistics(string[] input)
-    {
-        return input.Select(input => new { id = GameNumber(input), valid = !CubesExceedMax(ParseLine(input)) })
+    public static int SumOfValidGameIds(IEnumerable<string> input) =>
+        input.Select(input => new { id = GameNumber(input), valid = !CubesExceedMax(ParseLine(input)) })
             .Where(result => result.valid)
             .Sum(result => result.id);
-    }
 
     public static bool CubesExceedMax(Dictionary<string, int> maxDrawn)
     {
@@ -27,6 +25,7 @@ public static class CubeGame
     {
         return Convert.ToInt32(Regex.Match(line, "Game (\\d+)").Groups[1].Value);
     }
+
     public static Dictionary<string, int> ParseLine(string input)
     {
         var resultsOnly = input[(input.IndexOf(":") + 1)..];
