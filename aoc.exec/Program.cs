@@ -1,13 +1,15 @@
 ﻿using System.Diagnostics;
 using aoc.solutions;
 
-var days = new Dictionary<string, Func<IEnumerable<string>, int>[]> {
+var days = new Dictionary<string, Func<IEnumerable<string>, int>[]>
+{
     ["01.1.txt"] = [
         RecoverCalibrationValue.FromLines,
         RecoverCalibrationValue.FromLinesDigitified
     ],
     ["02.1.txt"] = [
-        CubeGame.SumOfValidGameIds
+        CubeGame.SumOfValidGameIds,
+        CubeGame.SumOfPowersFromInput
     ]
 };
 
@@ -17,9 +19,11 @@ Func<string, Func<IEnumerable<string>, int>, int> LoadAndExecute =
 
 // exec in sequence
 var stopwatch = Stopwatch.StartNew();
-foreach (var (dayInputFileName, parts) in days) {
+foreach (var (dayInputFileName, parts) in days)
+{
     Console.WriteLine($"Day {dayInputFileName[..2]}");
-    foreach (var part in parts) {
+    foreach (var part in parts)
+    {
         stopwatch.Restart();
         Console.WriteLine($"The result is {LoadAndExecute(dayInputFileName, part)}");
         stopwatch.Stop();
